@@ -35,9 +35,17 @@ class SortComparison {
      * @return array sorted in ascending order
      *
      */
-    static double [] selectionSort (double a[]){
+    static double [] selectionSort (double[] a){
+        for (int i = 0; i < a.length-1; i++) {
+            int min = i;
+            for (int j = i + 1; j < a.length; j++)
+                if (a[j] < a[min])
+                    min = j;
 
-        //todo: implement the sort
+            double temp = a[min];
+            a[min] = a[i];
+            a[i] = temp;
+        }
         return a;
     }
 
@@ -48,7 +56,7 @@ class SortComparison {
      * @return array sorted in ascending order
      *
      */
-    static double [] quickSort (double a[]){
+    static double [] quickSort (double[] a){
 
         //todo: implement the sort
         return a;
@@ -62,7 +70,7 @@ class SortComparison {
      * @return after the method returns, the array must be in ascending sorted order.
      */
 
-    static double[] mergeSortIterative (double a[]) {
+    static double[] mergeSortIterative (double[] a) {
 
         //todo: implement the sort
         return a;
@@ -75,7 +83,7 @@ class SortComparison {
      * @param a: An unsorted array of doubles.
      * @return after the method returns, the array must be in ascending sorted order.
      */
-    static double[] mergeSortRecursive (double a[]) {
+    static double[] mergeSortRecursive (double[] a) {
 
         return a;
     }
@@ -83,6 +91,6 @@ class SortComparison {
 
     public static void main(String[] args) {
         //todo: do experiments as per assignment instructions
-    }
 
+    }
 }
