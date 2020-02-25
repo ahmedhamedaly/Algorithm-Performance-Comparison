@@ -36,7 +36,7 @@ class SortComparison {
      *
      */
     static double [] selectionSort (double[] a){
-        for (int i = 0; i < a.length-1; i++) {
+        for (int i = 0; i < a.length - 1; i++) {
             int min = i;
             for (int j = i + 1; j < a.length; j++)
                 if (a[j] < a[min])
@@ -57,9 +57,38 @@ class SortComparison {
      *
      */
     static double [] quickSort (double[] a){
-
-        //todo: implement the sort
+        quickSort(a, 0, a.length - 1);
         return a;
+    }
+
+    static void quickSort (double a[], int lo, int hi){
+        if(lo < hi){
+            int pivotPos = partition(a, lo, hi);
+            quickSort(a, lo, pivotPos-1);
+            quickSort(a, pivotPos + 1, hi);
+        }
+
+    }
+
+    // ADDITION TO QUICK SORT
+    static int partition (double[] a, int lo, int hi){
+        double tmp;
+        int i = lo - 1;
+        double pivot = a[hi];
+
+        for(int j = lo; j < hi; j++){
+            if(a[j] < pivot){
+                i++;
+                tmp = a[i];
+                a[i]= a[j];
+                a[j] = tmp;
+            }
+        }
+        tmp = a[i + 1];
+        a[i + 1] = a[hi];
+        a[hi] = tmp;
+
+        return i + 1;
     }
 
     /**
@@ -86,11 +115,5 @@ class SortComparison {
     static double[] mergeSortRecursive (double[] a) {
 
         return a;
-    }
-
-
-    public static void main(String[] args) {
-        //todo: do experiments as per assignment instructions
-
     }
 }
