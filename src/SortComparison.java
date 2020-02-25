@@ -39,13 +39,13 @@ class SortComparison {
      */
     static double [] selectionSort (double[] a){
         for (int i = 0; i < a.length - 1; i++) {
-            int min = i;
+            int mi = i;
             for (int j = i + 1; j < a.length; j++)
-                if (a[j] < a[min])
-                    min = j;
+                if (a[j] < a[mi])
+                    mi = j;
 
-            double temp = a[min];
-            a[min] = a[i];
+            double temp = a[mi];
+            a[mi] = a[i];
             a[i] = temp;
         }
         return a;
@@ -72,7 +72,7 @@ class SortComparison {
 
     }
 
-    // ADDITION TO QUICK SORT
+    // NEEDED FOR QUICK SORT
     static int partition (double[] a, int lo, int hi){
         double tmp;
         int i = lo - 1;
@@ -148,7 +148,42 @@ class SortComparison {
      * @return after the method returns, the array must be in ascending sorted order.
      */
     static double[] mergeSortRecursive (double[] a) {
-
+        double[] aux = new double[a.length];
+        mergeSortRecursive(a, aux, 0, a.length - 1);
         return a;
+    }
+
+    // NEEDED FOR MERGE SORT
+    static void mergeSortRecursive (double[] a, double[] aux, int lo, int hi) {
+        if(hi <= lo)
+            return;
+
+        int mi = lo + (hi - lo)/2;
+        mergeSortRecursive(a, aux, lo, mi);
+        mergeSortRecursive(a, aux, mi + 1, hi);
+        recursiveMerge(a, aux, lo, mi, hi);
+    }
+
+    // NEEDED FOR MERGE SORT
+    static void recursiveMerge (double[] a, double[] aux, int lo, int mi, int hi){
+        if (hi + 1 - lo >= 0) System.arraycopy(a, lo, aux, lo, hi + 1 - lo);
+
+        int m = lo;
+        int n = mi + 1;
+
+        for(int j = lo; j <= hi; j++) {
+            if(m > mi)
+                a[j] = aux[n++];
+
+            else if(n > hi)
+                a[j] = aux[m++];
+
+            else if(aux[m] < aux[n])
+                a[j] = aux[m++];
+
+            else
+                a[j] = aux[n++];
+
+        }
     }
 }
