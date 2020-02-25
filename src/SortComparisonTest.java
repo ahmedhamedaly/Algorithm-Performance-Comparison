@@ -8,7 +8,7 @@ import org.junit.runners.JUnit4;
 /**
  *  Test class for SortComparison.java
  *
- *  @author
+ *  @author Ahmed Hamed Aly
  *  @version HT 2020
  */
 @RunWith(JUnit4.class)
@@ -28,13 +28,44 @@ public class SortComparisonTest
      * Check that the methods work for empty arrays
      */
     @Test
-    public void testEmpty()
-    {
+    public void testEmpty() {
+        double[] empty = new double[0];
+
+        assertEquals(empty, SortComparison.insertionSort(empty));
+        assertEquals(empty, SortComparison.selectionSort(empty));
+        assertEquals(empty, SortComparison.quickSort(empty));
+        assertEquals(empty, SortComparison.mergeSortIterative(empty));
+        assertEquals(empty, SortComparison.mergeSortRecursive(empty));
     }
 
 
-    // TODO: add more tests here. Each line of code and ech decision in Collinear.java should
+    // TODO: add more tests here. Each line of code and ech decision in SortComparison.java should
     // be executed at least once from at least one test.
+
+    @Test
+    public void insertionSortTest() {
+
+    }
+
+    @Test
+    public void selectionSortTest() {
+
+    }
+
+    @Test
+    public void quickSortTest() {
+
+    }
+
+    @Test
+    public void mergeSortIterativeTest() {
+
+    }
+
+    @Test
+    public void mergeSortRecursive() {
+
+    }
 
     // ----------------------------------------------------------
     /**
