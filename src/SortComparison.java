@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 /**
  *  This class contains static methods that implementing sorting of an array of numbers
  *  using different sort algorithms.
@@ -61,7 +63,7 @@ class SortComparison {
         return a;
     }
 
-    static void quickSort (double a[], int lo, int hi){
+    static void quickSort (double[] a, int lo, int hi){
         if(lo < hi){
             int pivotPos = partition(a, lo, hi);
             quickSort(a, lo, pivotPos-1);
@@ -100,10 +102,43 @@ class SortComparison {
      */
 
     static double[] mergeSortIterative (double[] a) {
-
-        //todo: implement the sort
+        double[] aux = Arrays.copyOf(a, a.length);
+        mergeSortIterative(a, aux,0, a.length - 1);
         return a;
     }
+
+    // NEEDED FOR MERGE SORT
+    static void mergeSortIterative (double[] a, double[] aux, int lo, int hi) {
+        for(int s = 1; s <= hi - lo; s = s*2) {
+            for(int z = lo; z < hi; z += s*2) {
+                int mi = Integer.min(z + s - 1, hi);
+                int hi2 = Integer.min(hi, (z + s*2 - 1));
+                iterativeMerge(a, aux, z, mi, hi2);
+            }
+        }
+    }
+
+    // NEEDED FOR MERGE SORT
+    static void iterativeMerge(double[] a, double[] aux, int lo, int mi, int hi) {
+        int k = lo;
+        int i = lo;
+        int j = mi + 1;
+
+        while(i <= mi && j <= hi) {
+            if(a[i] < a[j])
+                aux[k++] = a[i++];
+            else
+                aux[k++] = a[j++];
+        }
+
+        while(i <= mi)
+            aux[k++] = a[i++];
+
+        for(k = lo; k <= hi; k++) {
+            a[k] = aux[k];
+        }
+    }
+
 
     /**
      * Sorts an array of doubles using recursive implementation of Merge Sort.
