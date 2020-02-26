@@ -4,7 +4,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
 //-------------------------------------------------------------------------
 /**
@@ -14,12 +18,10 @@ import java.util.Arrays;
  *  @version HT 2020
  */
 @RunWith(JUnit4.class)
-public class SortComparisonTest
-{
+public class SortComparisonTest {
     //~ Constructor ........................................................
     @Test
-    public void testConstructor()
-    {
+    public void testConstructor() {
         new SortComparison();
     }
 
@@ -115,8 +117,29 @@ public class SortComparisonTest
      *  Use this main method to create the experiments needed to answer the experimental performance questions of this assignment.
      *
      */
-    public static void main(String[] args) {
-        //TODO: implement this method
-    }
+    public static void main(String[] args) throws FileNotFoundException {
+        String[] testFiles = {
+                "testFiles/numbers10.txt",
+                "testFiles/numbers100.txt",
+                "testFiles/numbers1000.txt",
+                "testFiles/numbers1000Duplicates.txt",
+                "testFiles/numbersNearlyOrdered1000.txt",
+                "testFiles/numbersReverse1000.txt",
+                "testFiles/numbersSorted1000.txt"
+        };
 
+        Scanner inputScanner;
+
+        for (String file : testFiles) {
+            
+            File file1 = new File(file);
+            inputScanner = new Scanner(file1);
+            ArrayList<String> doubles = new ArrayList<>();
+
+            while (inputScanner.hasNextLine())
+                doubles.add(inputScanner.nextLine());
+
+            System.out.println(doubles.toString());
+        }
+    }
 }
