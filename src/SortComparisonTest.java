@@ -16,7 +16,21 @@ import java.util.Scanner;
  *
  *  @author Ahmed Hamed Aly
  *  @version HT 2020
+ *
+ * RUNNING TIME PER DATA SAMPLE AND ALGORITHM
+ *
+ * |                    | INSERT | SELECTION | QUICK | MERGE (I) | MERGE (R) |
+ * |--------------------|--------|-----------|-------|-----------|-----------|
+ * | 10 RANDOM          |   --   | YES       | YES   | YES       | YES       |
+ * | 100 RANDOM         |  YES   | YES       | YES   | YES       | YES       |
+ * | 1000 RANDOM        |  YES   | YES       | YES   | YES       | YES       |
+ * | 1000 FEW UNIQUE    |  YES   | YES       | YES   | --        | YES       |
+ * | 1000 NEARLY ORDERED|  YES   | YES       | YES   | YES       | YES       |
+ * | 1000 REVERSE ORDER |  YES   | YES       | YES   | YES       | YES       |
+ * | 1000 SORTED        |  YES   | YES       | YES   | YES       | YES       |
+ * |-------------------------------------------------------------------------|
  */
+
 @RunWith(JUnit4.class)
 public class SortComparisonTest {
     //~ Constructor ........................................................
@@ -134,12 +148,26 @@ public class SortComparisonTest {
             
             File file1 = new File(file);
             inputScanner = new Scanner(file1);
-            ArrayList<String> doubles = new ArrayList<>();
+            ArrayList<String> doublesList = new ArrayList<>();
 
             while (inputScanner.hasNextLine())
-                doubles.add(inputScanner.nextLine());
+                doublesList.add(inputScanner.nextLine());
 
-            System.out.println(doubles.toString());
+            double[] a = new double[doublesList.size()];
+            for (int i = 0; i < doublesList.size(); i++) {
+                a[i] = Double.parseDouble(doublesList.get(i));
+            }
+
+            String output_title = file.replaceAll("testFiles/", "").replaceAll(".txt", "");
+
+            long start = System.nanoTime();
+
+            SortComparison.insertionSort(a);
+
+            long end = System.nanoTime();
+
+            System.out.println(start/end);
+
         }
     }
 }
